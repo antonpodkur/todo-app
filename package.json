@@ -1,0 +1,8 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/antonpodkur/todo-app.git",
+  "author": "Anton Podkur",
+  "license": "MIT"
+}
