@@ -1,10 +1,9 @@
 import * as React from 'react'
-import { FunctionDeclaration } from 'typescript';
 
 import '../css/TodoList.css'
 
 
-interface Todo {
+interface ITodo {
     text: string,
     finished: boolean,
     date: Date
@@ -14,24 +13,17 @@ interface Todo {
 
 function TodoList(){
 
-    const Todos: Array<Todo> = [ {text: 'my first task', finished: false, date: new Date()}, {text: 'my second task', finished: true, date: new Date()}]
+    const Todos: Array<ITodo> = [ {text: 'my first task', finished: false, date: new Date()}, {text: 'my second task', finished: true, date: new Date()}]
 
-    const [todos, setTodos] = React.useState<Todo[]>([]);
+    const [todos, setTodos] = React.useState<ITodo[]>([]);
 
     React.useEffect(()=> {
         setTodos(Todos);
         console.log(todos);
     },[]);
 
-    function handleClick(index: number) :void {
-        const todosTemp = [...todos];
-        todosTemp[index].finished = !todos[index].finished
-        setTodos(todosTemp);
-        console.log(todos);
-    }
-
     function addTodo(text: string): void {
-        const newTodos: Array<Todo> = [...todos, {text: text, finished: false, date: new Date()}];
+        const newTodos: Array<ITodo> = [...todos, {text: text, finished: false, date: new Date()}];
         setTodos(newTodos);
     }
 
@@ -99,7 +91,7 @@ function FormTodo(Props: FormTodoProps) {
 interface TodoProps {
     key: number,
     index: number,
-    todo: Todo,
+    todo: ITodo,
     markTodo: (index: number) => void,
     removeTodo: (index: number) => void
 }
