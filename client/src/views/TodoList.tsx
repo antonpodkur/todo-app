@@ -22,9 +22,23 @@ function TodoList(){
         console.log(todos);
     },[]);
 
-    function addTodo(text: string): void {
+    async function addTodo(text: string) {
         const newTodos: Array<ITodo> = [...todos, {text: text, finished: false, date: new Date()}];
         setTodos(newTodos);
+
+        try{
+            const todo = await fetch('http://localhost:3001/api/todos/create',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({task: text, user_id: "8656576c-b367-463b-9771-f2b71c915416"}),
+            }); 
+            console.log(todo);
+        } catch (e) {
+            throw e;
+        }
     }
 
     function markTodo(index: number) : void {
@@ -70,8 +84,8 @@ function FormTodo(Props: FormTodoProps) {
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         if(!value) return;
-        console.log(value)
         Props.addTodo(value);
+        console.log(value)
         setValue("");
     }
 
